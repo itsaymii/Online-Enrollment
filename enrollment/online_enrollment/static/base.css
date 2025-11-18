@@ -1,0 +1,204 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #279FF5
+;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .enrollment-item {
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .enrollment-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .enrollment-item li {
+            font-size: 1.1rem;
+            padding: 5px 0;
+            color: #555;
+        }
+
+        .enrollment-item li span {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .enrollment-item li {
+            padding-left: 15px;
+        }
+
+        .enrollment-item {
+            border: 1px solid #ddd;
+        }
+
+/* Student */
+        .student-item {
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .student-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .student-item li {
+            font-size: 1.1rem;
+            padding: 5px 0;
+            color: #555;
+        }
+
+        .student-item li span {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .student-item li {
+            padding-left: 15px;
+        }
+
+        .student-item {
+            border: 1px solid #ddd;
+        }
+
+/* Course */
+        .course-item {
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .course-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-item li {
+            font-size: 1.1rem;
+            padding: 5px 0;
+            color: #555;
+        }
+
+        .course-item li span {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .course-item li {
+            padding-left: 15px;
+        }
+
+        .course-item {
+            border: 1px solid #ddd;
+        }
+
+/* payment */
+        .payment-item {
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .payment-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .payment-item li {
+            font-size: 1.1rem;
+            padding: 5px 0;
+            color: #555;
+        }
+
+        .payment-item li span {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .payment-item li {
+            padding-left: 15px;
+        }
+
+        .payment-item {
+            border: 1px solid #ddd;
+        }
+
+/* instructor */
+        .instructor-item {
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .instructor-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .instructor-item li {
+            font-size: 1.1rem;
+            padding: 5px 0;
+            color: #555;
+        }
+
+        .instructor-item li span {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .instructor-item li {
+            padding-left: 15px;
+        }
+
+        .instructor-item {
+            border: 1px solid #ddd;
+        }
+
+        

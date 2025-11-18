@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container py-5 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+      <div class="row g-4 align-items-center w-100" style="max-width: 1400px; margin: 0 auto;">
+        <!-- Sidebar -->
+        <div class="col-lg-3 d-flex flex-column h-100">
+          <div class="bg-gradient bg-primary rounded-4 shadow-lg p-4 d-flex flex-column align-items-center text-white h-100" style="min-height: 100%; background: linear-gradient(180deg, #0d6efd 60%, #2563eb 100%);">
+            <div class="mb-4">
+              <div class="rounded-circle bg-white d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48" stroke="currentColor" class="w-50 h-50 text-primary">
+                  <circle cx="24" cy="18" r="10" fill="#0d6efd" />
+                  <ellipse cx="24" cy="36" rx="14" ry="8" fill="#0d6efd" />
+                </svg>
+              </div>
+            </div>
+            <div class="mb-2 text-center">
+              <div class="fw-bold fs-5">{{ user.get_full_name|default:user.username|upper }}</div>
+              <div class="fs-6 text-light">{{ user.email|default:'user@email.com' }}</div>
+            </div>
+            <div class="w-100 mt-4 d-flex flex-column flex-grow-1" style="height: 100%;">
+              <div>
+                <a href="?tab=students" class="btn btn-outline-light w-100 mb-2 py-2 d-flex align-items-center justify-content-start gap-2 fs-6 {% if tab == 'students' or not tab %}active border-2 border-white bg-white text-primary{% endif %}">
+                  <span style="font-size: 1.2rem;">👨‍🎓</span> <span>Students</span>
+                </a>
+                <a href="?tab=courses" class="btn btn-outline-light w-100 mb-2 py-2 d-flex align-items-center justify-content-start gap-2 fs-6 {% if tab == 'courses' %}active border-2 border-white bg-white text-primary{% endif %}">
+                  <span style="font-size: 1.2rem;">📚</span> <span>Courses</span>
+                </a>
+                <a href="?tab=payments" class="btn btn-outline-light w-100 mb-2 py-2 d-flex align-items-center justify-content-start gap-2 fs-6 {% if tab == 'payments' %}active border-2 border-white bg-white text-primary{% endif %}">
+                  <span style="font-size: 1.2rem;">💳</span> <span>Payments</span>
+                </a>
+                <a href="?tab=instructors" class="btn btn-outline-light w-100 mb-2 py-2 d-flex align-items-center justify-content-start gap-2 fs-6 {% if tab == 'instructors' %}active border-2 border-white bg-white text-primary{% endif %}">
+                  <span style="font-size: 1.2rem;">🧑‍🏫</span> <span>Instructors</span>
+                </a>
+                <a href="?tab=enrollments" class="btn btn-outline-light w-100 mb-2 py-2 d-flex align-items-center justify-content-start gap-2 fs-6 {% if tab == 'enrollments' %}active border-2 border-white bg-white text-primary{% endif %}">
+                  <span style="font-size: 1.2rem;">📝</span> <span>Enrollments</span>
+                </a>
+              </div>
+              <div class="mt-auto pt-5 pb-2" style="padding-top: 11rem !important;">
+                <a href="/logout/" class="btn btn-danger w-100 px-4 py-2 fw-bold shadow">Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Main Content -->
+        <div class="col-lg-9 d-flex flex-column h-100">
+          <div class="bg-white rounded-4 shadow-lg p-5 h-100 d-flex flex-column justify-content-between">
+            <h2 class="mb-4 fw-bold text-primary">Welcome, {{ user.get_full_name|default:user.username|title }}!</h2>
+            <div class="flex-grow-1">
+              {% if tab == 'students' or not tab %}
+                {% include 'accounts/students_list.html' %}
+              {% elif tab == 'courses' %}
+                {% include 'accounts/courses_list.html' %}
+              {% elif tab == 'payments' %}
+                {% include 'accounts/payments_list.html' %}
+              {% elif tab == 'instructors' %}
+                {% include 'accounts/instructors_list.html' %}
+              {% elif tab == 'enrollments' %}
+                {% include 'accounts/enrollments_list.html' %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+  </body>
+</html>

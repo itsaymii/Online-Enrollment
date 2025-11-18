@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content%} 
+    <h1>Instructor Details</h1>
+    <ul>
+        {% for instructor in instructors %}
+        <li class="instructor-item">
+            <ul>
+                <li><span>Name:</span> {{ instructor.name }}</li>
+                <li><span>Email:</span> {{ instructor.email }}</li>
+                <li><span>Department:</span> {{ instructor.department }}</li>
+                <li><span>Contact Number:</span> {{ instructor.contact_number }}</li>
+                <li><span>Instructor ID:</span> {{ instructor.instructor_id }}</li>
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content%}
+    <h1>Enrollment Details</h1>
+    <ul>
+        {% for enrollment in enrollments %}
+        <li class="enrollment-item">
+            <ul>
+                <li><span>Enrollment ID:</span> {{ enrollment.enrollment_id }}</li>
+                <li><span>Course ID:</span> {{ enrollment.course_id }}</li>
+                <li><span>Student ID:</span> {{ enrollment.student_id }}</li>
+                <li><span>Enrollment Date:</span> {{ enrollment.enrollment_date }}</li>
+                <li><span>Status:</span> {{ enrollment.status }}</li>
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock%}
+

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<h1>Payment Details</h1>
+    <ul>
+        {% for payment in payments %}
+        <li class="payment-item">
+            <ul>
+                <li><span>Student ID:</span> {{ payment.student_id }}</li>
+                <li><span>Amount:</span> {{ payment.amount }}</li>
+                <li><span>Payment Date:</span> {{ payment.payment_date }}</li>
+                <li><span>Payment Method:</span> {{ payment.payment_methods }}</li>
+                <li><span>Payment ID:</span> {{ payment.payment_id }}</li>
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
