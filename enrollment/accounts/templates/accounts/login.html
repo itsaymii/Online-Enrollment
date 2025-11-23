@@ -17,10 +17,60 @@
       }
     </script>
   </head>
-  <body class="bg-gradient-to-br from-gray-100 via-white to-gray-200 min-h-screen flex items-center justify-center font-sans">
-    <div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl p-12 border border-gray-200 transition duration-300 hover:shadow-3xl hover:-translate-y-1 hover:border-blue-300">
+  <body class="bg-gradient-to-br from-gray-100 via-white to-gray-200 min-h-screen flex items-center justify-center font-sans relative overflow-hidden">
+    <!-- Glassmorphism Animated Background -->
+    <div class="pointer-events-none select-none absolute inset-0 z-0">
+      <div class="absolute bg-gradient-to-br from-blue-400/40 via-pink-300/30 to-purple-400/40 rounded-full blur-[120px] animate-float1" style="width: 420px; height: 420px; left: -8%; top: -10%;"></div>
+      <div class="absolute bg-gradient-to-tr from-pink-400/40 via-yellow-200/30 to-blue-300/40 rounded-full blur-[100px] animate-float2" style="width: 320px; height: 320px; right: -10%; top: 20%;"></div>
+      <div class="absolute bg-gradient-to-tl from-green-300/40 via-blue-200/30 to-pink-300/40 rounded-full blur-[90px] animate-float3" style="width: 260px; height: 260px; left: 10%; bottom: 8%;"></div>
+      <div class="absolute bg-gradient-to-br from-yellow-200/40 via-pink-200/30 to-blue-200/40 rounded-full blur-[80px] animate-float4" style="width: 200px; height: 200px; right: 8%; bottom: 12%;"></div>
+      <div class="absolute bg-gradient-to-br from-white/30 to-blue-200/20 rounded-full blur-[160px]" style="width: 900px; height: 900px; left: 50%; top: 50%; transform: translate(-50%,-50%);"></div>
+    </div>
+    <style>
+      @keyframes float1 { 0%{transform:translateY(0);} 50%{transform:translateY(-30px);} 100%{transform:translateY(0);} }
+      @keyframes float2 { 0%{transform:translateY(0);} 50%{transform:translateY(40px);} 100%{transform:translateY(0);} }
+      @keyframes float3 { 0%{transform:translateX(0);} 50%{transform:translateX(30px);} 100%{transform:translateX(0);} }
+      @keyframes float4 { 0%{transform:translateX(0);} 50%{transform:translateX(-30px);} 100%{transform:translateX(0);} }
+      .animate-float1 { animation: float1 6s ease-in-out infinite; }
+      .animate-float2 { animation: float2 7s ease-in-out infinite; }
+      .animate-float3 { animation: float3 8s ease-in-out infinite; }
+      .animate-float4 { animation: float4 9s ease-in-out infinite; }
+    </style>
+    <div class="w-full max-w-lg rounded-3xl p-12 z-10 glass-card">
+          <style>
+            .glass-card {
+              background: linear-gradient(135deg, rgba(255,255,255,0.22) 60%, rgba(200,220,255,0.13) 100%);
+              box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.22), 0 1.5px 8px 0 rgba(255,255,255,0.18) inset;
+              backdrop-filter: blur(28px) saturate(180%);
+              -webkit-backdrop-filter: blur(28px) saturate(180%);
+              border-radius: 2.2rem;
+              border: 2.5px solid rgba(255,255,255,0.32);
+              border-top: 2.5px solid rgba(255,255,255,0.55);
+              border-left: 2.5px solid rgba(255,255,255,0.45);
+              border-bottom: 2.5px solid rgba(200,200,255,0.18);
+              border-right: 2.5px solid rgba(200,200,255,0.12);
+              box-shadow: 0 8px 32px 0 rgba(31,38,135,0.22), 0 1.5px 8px 0 rgba(255,255,255,0.18) inset;
+              transition: box-shadow 0.3s, border 0.3s, background 0.3s;
+              overflow: hidden;
+            }
+            .glass-card::before {
+              content: "";
+              position: absolute;
+              inset: 0;
+              border-radius: 2.2rem;
+              pointer-events: none;
+              background: linear-gradient(120deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.08) 100%);
+              box-shadow: 0 0 32px 0 rgba(255,255,255,0.12) inset;
+              z-index: 1;
+            }
+            .glass-card:hover {
+              box-shadow: 0 16px 48px 0 rgba(31,38,135,0.28), 0 2px 12px 0 rgba(255,255,255,0.22) inset;
+              border: 2.5px solid rgba(80,150,255,0.22);
+              background: linear-gradient(135deg, rgba(255,255,255,0.28) 60%, rgba(200,220,255,0.18) 100%);
+            }
+          </style>
       <div class="flex flex-col items-center mb-8">
-        <h2 class="text-3xl font-bold text-gray-800 mb-2 text-center tracking-tight">Login</h2>
+        <h2 class="text-3xl font-bold text-gray-800 mb-2 text-center tracking-tight drop-shadow">Login</h2>
         <p class="text-gray-500 text-center mb-2">Sign in to access your dashboard</p>
       </div>
 
@@ -37,14 +87,106 @@
             {% endif %}
           </div>
         {% endfor %}
-        <button type="submit" class="w-5/6 py-3 px-5 bg-blue-700 text-white text-md font-semibold rounded-xl shadow transition focus:outline-none focus:ring-2 focus:ring-blue-400">Login</button>
+        <button type="submit" class="w-5/6 glass-btn" style="
+          background: linear-gradient(120deg, #2563eb 80%, #60a5fa 100%);
+          color: #fff;
+          border-radius: 12px;
+          border: 1.5px solid rgba(255,255,255,0.3);
+          border-top: 1.5px solid rgba(255,255,255,0.5);
+          border-left: 1.5px solid rgba(255,255,255,0.5);
+          box-shadow: 0 4px 24px 0 rgba(37,99,235,0.18), 0 0 0 1.5px rgba(255,255,255,0.18) inset, 0 0 16px 0 rgba(80,180,255,0.10) inset;
+          font-weight: 700;
+          backdrop-filter: blur(10px) saturate(180%);
+          -webkit-backdrop-filter: blur(10px) saturate(180%);
+          transition: background 0.2s, box-shadow 0.2s, border 0.2s;
+        ">Login</button>
       </form>
 
       <div class="mt-8 text-center">
-        <p class="text-gray-600 text-base">Don’t have an account?
-          <a href="{% url 'register_user' %}" class="text-blue-600 font-semibold hover:underline">Register</a>
+        <p class="text-black text-base drop-shadow">Don’t have an account?
+          <a href="{% url 'register_user' %}" class="text-blue-400 font-semibold hover:underline ml-1">Register</a>
         </p>
       </div>
-    </div>
-  </body>
-</html>
+      </form>
+
+          <style>
+            .glass-card {
+              position: relative;
+              background: linear-gradient(135deg, rgba(255,255,255,0.22) 60%, rgba(200,220,255,0.13) 100%);
+              box-shadow:
+                0 8px 32px 0 rgba(31, 38, 135, 0.22),
+                0 1.5px 8px 0 rgba(255,255,255,0.18) inset,
+                0 0 40px 0 rgba(80,180,255,0.10) inset,
+                0 0 0 2px rgba(255,255,255,0.10) inset;
+              backdrop-filter: blur(32px) saturate(200%);
+              -webkit-backdrop-filter: blur(32px) saturate(200%);
+              border-radius: 2.2rem;
+              border: 2.5px solid rgba(255,255,255,0.32);
+              border-top: 2.5px solid rgba(255,255,255,0.55);
+              border-left: 2.5px solid rgba(255,255,255,0.45);
+              border-bottom: 2.5px solid rgba(200,200,255,0.18);
+              border-right: 2.5px solid rgba(200,200,255,0.12);
+              transition: box-shadow 0.3s, border 0.3s, background 0.3s;
+              overflow: hidden;
+            }
+            .glass-card::before {
+              content: "";
+              position: absolute;
+              inset: 0;
+              border-radius: 2.2rem;
+              pointer-events: none;
+              background: linear-gradient(120deg, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0.10) 100%);
+              box-shadow: 0 0 64px 0 rgba(255,255,255,0.18) inset, 0 0 0 2px rgba(80,180,255,0.10) inset;
+              z-index: 1;
+            }
+            .glass-card:hover {
+              box-shadow:
+                0 16px 48px 0 rgba(31,38,135,0.28),
+                0 2px 12px 0 rgba(255,255,255,0.22) inset,
+                0 0 80px 0 rgba(80,180,255,0.13) inset;
+              border: 2.5px solid rgba(80,150,255,0.22);
+              background: linear-gradient(135deg, rgba(255,255,255,0.28) 60%, rgba(200,220,255,0.18) 100%);
+            }
+
+            .glass-input {
+              background: linear-gradient(120deg, rgba(255,255,255,0.18) 60%, rgba(200,220,255,0.10) 100%);
+              border-radius: 12px;
+              border: 1.5px solid rgba(255,255,255,0.3);
+              border-top: 1.5px solid rgba(255,255,255,0.5);
+              border-left: 1.5px solid rgba(255,255,255,0.5);
+              box-shadow: 0 2px 8px rgba(31, 38, 135, 0.10), 0 0 0 1.5px rgba(255,255,255,0.15) inset, 0 0 16px 0 rgba(80,180,255,0.10) inset;
+              color: #fff;
+              padding: 0.75rem 1rem;
+              font-size: 1rem;
+              outline: none;
+              transition: box-shadow 0.2s, border 0.2s;
+              backdrop-filter: blur(12px) saturate(180%);
+              -webkit-backdrop-filter: blur(12px) saturate(180%);
+            }
+            .glass-input:focus {
+              box-shadow: 0 0 0 2px #3b82f6, 0 2px 8px rgba(31, 38, 135, 0.15), 0 0 0 1.5px rgba(255,255,255,0.18) inset, 0 0 24px 0 rgba(80,180,255,0.13) inset;
+              border-color: #3b82f6;
+            }
+
+            .glass-btn {
+              background: linear-gradient(120deg, rgba(255,255,255,0.22) 60%, rgba(80,180,255,0.13) 100%);
+              border-radius: 12px;
+              border: 1.5px solid rgba(255,255,255,0.3);
+              border-top: 1.5px solid rgba(255,255,255,0.5);
+              border-left: 1.5px solid rgba(255,255,255,0.5);
+              box-shadow: 0 2px 8px rgba(31, 38, 135, 0.10), 0 0 0 1.5px rgba(255,255,255,0.15) inset, 0 0 16px 0 rgba(80,180,255,0.10) inset;
+              color: #fff;
+              font-weight: 600;
+              padding: 0.75rem 1.5rem;
+              font-size: 1rem;
+              outline: none;
+              transition: background 0.2s, box-shadow 0.2s, border 0.2s;
+              backdrop-filter: blur(12px) saturate(180%);
+              -webkit-backdrop-filter: blur(12px) saturate(180%);
+            }
+            .glass-btn:hover, .glass-btn:focus {
+              background: linear-gradient(120deg, rgba(59, 130, 246, 0.25) 60%, rgba(80,180,255,0.18) 100%);
+              box-shadow: 0 0 0 2px #3b82f6, 0 2px 8px rgba(31, 38, 135, 0.18), 0 0 0 1.5px rgba(255,255,255,0.18) inset, 0 0 32px 0 rgba(80,180,255,0.18) inset;
+              border-color: #3b82f6;
+            }
+          </style>

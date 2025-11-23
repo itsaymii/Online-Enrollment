@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'courses',
     'online_enrollment',
     'accounts',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
