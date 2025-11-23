@@ -141,16 +141,6 @@ def courses_list(request):
         'add_form': add_form,
     })
 
-def edit_course(request, course_id):
-    course = get_object_or_404(Course, course_id=course_id)
-    if request.method == 'POST':
-        form = CourseForm(request.POST, instance=course)
-        if form.is_valid():
-            form.save()
-            return redirect('dashboard')
-    else:
-        form = CourseForm(instance=course)
-    return render(request, 'accounts/edit_course.html', {'form': form, 'course': course})
 from django.contrib import messages
 from .forms import RegisterForm
 from django.contrib.auth.decorators import login_required
