@@ -158,32 +158,31 @@ document.addEventListener('DOMContentLoaded', function() {
         {% endfor %}
     </div>
     {% endif %}
-    <div class="container mt-3 main-content" style="background: #f9f9f9; border-radius: 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); padding: 32px 24px;">
+    <div class="container mt-3 main-content glass-card glass">
         <div class="d-flex align-items-center justify-content-between mb-4">
-            <h2 class="fw-bold text-primary mb-0">Enrollments List</h2>
-            <button class="btn btn-success rounded-3 fw-semibold px-4 py-2" onclick="openModal('addEnrollmentModal')">Add Enrollment</button>
+                <h2 class="mb-3 mb-md-4 fw-bold text-primary text-center">Enrollments List</h2>
+            <button class="btn btn-success rounded-3 fw-semibold px-4 py-2 w-100 w-md-auto" style="max-width:220px;" onclick="openModal('addEnrollmentModal')">Add Enrollment</button>
         </div>
-        <div class="table-responsive" style="max-height: 520px; min-height: 420px; overflow-y: auto;">
-            <table class="table align-middle bg-white rounded-4 shadow-sm overflow-hidden" style="min-width: 700px;">
-                    <thead class="bg-primary text-white" style="position: sticky; top: 0; z-index: 2;">
-                        <tr style="border-radius: 12px;">
-                            <th class="py-3 px-4" style="position: sticky; top: 0; background: linear-gradient(90deg, #2563eb 60%, #0d6efd 100%); z-index: 3;">Enrollment ID</th>
-                            <th class="py-3 px-4" style="position: sticky; top: 0; background: linear-gradient(90deg, #2563eb 60%, #0d6efd 100%); z-index: 3;">Course ID</th>
-                            <th class="py-3 px-4" style="position: sticky; top: 0; background: linear-gradient(90deg, #2563eb 60%, #0d6efd 100%); z-index: 3;">Student ID</th>
-                            <th class="py-3 px-4" style="position: sticky; top: 0; background: linear-gradient(90deg, #2563eb 60%, #0d6efd 100%); z-index: 3;">Enrollment Date</th>
-                            <th class="py-3 px-4" style="position: sticky; top: 0; background: linear-gradient(90deg, #2563eb 60%, #0d6efd 100%); z-index: 3;">Status</th>
-                            <th class="py-3 px-4" style="position: sticky; top: 0; background: #2563eb; z-index: 3;">Actions</th>
+            <div class="table-responsive rounded-4 shadow-lg p-2" style="background: rgba(255,255,255,0.22); backdrop-filter: blur(16px); border-radius: 24px; box-shadow: 0 8px 32px 0 rgba(31,38,135,0.14); border: 1.5px solid rgba(37,99,235,0.10);">
+                <table class="table align-middle" style="background: rgba(255,255,255,0.13); border-radius: 18px; overflow: hidden; border-collapse: separate; border-spacing: 0; box-shadow: 0 2px 12px rgba(31,38,135,0.10);">
+                    <thead style="background: linear-gradient(90deg, #2563eb 60%, #0d6efd 100%); color: #fff; border-top-left-radius: 18px; border-top-right-radius: 18px; font-size: 1.08rem; letter-spacing: 0.5px; position: sticky; top: 0; z-index: 2;">
+                        <tr style="border-radius: 18px;">
+                            <th scope="col">ID</th>
+                            <th scope="col">Student</th>
+                            <th scope="col">Course</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="backdrop-filter: blur(4px); font-size: 1.01rem;">
                         {% for enrollment in enrollments %}
-                        <tr class="table-row-hover" style="transition: background 0.2s;">
-                            <td class="py-3 px-4">{{ enrollment.enrollment_id }}</td>
-                            <td class="py-3 px-4">{{ enrollment.course_id }}</td>
-                            <td class="py-3 px-4">{{ enrollment.student_id }}</td>
-                            <td class="py-3 px-4">{{ enrollment.enrollment_date }}</td>
-                            <td class="py-3 px-4">{{ enrollment.status|yesno:"Active,Inactive" }}</td>
-                            <td class="py-3 px-4">
+                        <tr style="transition: background 0.18s; border-bottom: 1.5px solid rgba(37,99,235,0.07);" onmouseover="this.style.background='rgba(37,99,235,0.13)'; this.style.color='#222';" onmouseout="this.style.background='rgba(37,99,235,0.07)'; this.style.color='';">
+                            <td style="padding: 0.75rem 1.1rem; background: rgba(37,99,235,0.07); border-right: 1px solid rgba(37,99,235,0.06);">{{ enrollment.enrollment_id }}</td>
+                            <td style="padding: 0.75rem 1.1rem; background: rgba(37,99,235,0.07); border-right: 1px solid rgba(37,99,235,0.06);">{{ enrollment.course_id }}</td>
+                            <td style="padding: 0.75rem 1.1rem; background: rgba(37,99,235,0.07); border-right: 1px solid rgba(37,99,235,0.06);">{{ enrollment.student_id }}</td>
+                            <td style="padding: 0.75rem 1.1rem; background: rgba(37,99,235,0.07); border-right: 1px solid rgba(37,99,235,0.06);">{{ enrollment.enrollment_date }}</td>
+                            <td style="padding: 0.75rem 1.1rem; background: rgba(37,99,235,0.07); border-right: 1px solid rgba(37,99,235,0.06);">{{ enrollment.status|yesno:"Active,Inactive" }}</td>
+                            <td style="padding: 0.75rem 1.1rem; background: rgba(37,99,235,0.07);"> 
                                 <button class="btn btn-primary btn-sm rounded-2 px-3" onclick="openModal('editEnrollmentModal{{ enrollment.enrollment_id }}')">Edit</button>
                             </td>
                         </tr>
@@ -196,10 +195,10 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         </div>
         <div class="modal" id="addEnrollmentModal">
-            <div class="modal-content">
+            <div class="modal-content glass-modal">
                 <span class="close btn btn-secondary float-end">&times;</span>
                 <h2 class="mb-4 fw-bold text-primary">Add Enrollment</h2>
-                <form method="post" action="{% url 'enrollments_list' %}">
+                <form method="post" action="{% url 'dashboard' %}?tab=enrollments">
                     {% csrf_token %}
                     <input type="hidden" name="action" value="add">
                     {{ add_form.as_p }}
@@ -209,10 +208,10 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         {% for enrollment, edit_form in enrollment_forms %}
         <div class="modal" id="editEnrollmentModal{{ enrollment.enrollment_id }}">
-            <div class="modal-content">
+            <div class="modal-content glass-modal">
                 <span class="close btn btn-secondary float-end">&times;</span>
                 <h2 class="mb-4 fw-bold text-primary">Edit Enrollment</h2>
-                <form method="post" action="{% url 'enrollments_list' %}">
+                <form method="post" action="{% url 'dashboard' %}?tab=enrollments">
                     {% csrf_token %}
                     <input type="hidden" name="action" value="edit_{{ enrollment.enrollment_id }}">
                     <input type="hidden" name="enrollment_id" value="{{ enrollment.enrollment_id }}">
@@ -222,34 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         </div>
         {% endfor %}
-        <style>
-            .table {
-                border-radius: 16px;
-                overflow: hidden;
-                box-shadow: 0 6px 32px rgba(0,0,0,0.12);
-                background: #f8fafc;
-                border: 1px solid #e3e6ed;
-            }
-            .table-responsive {
-                scrollbar-width: none;
-                -ms-overflow-style: none; 
-            }
-            .table-responsive::-webkit-scrollbar {
-                display: none; 
-            }
-            .table-row-hover:hover {
-                background: #e3e6ed !important;
-            }
-            thead.bg-primary th {
-                background: linear-gradient(90deg, #2563eb 60%, #0d6efd 100%);
-                color: #fff;
-                border-bottom: 2px solid #2563eb;
-            }
-            td {
-                background: #fff;
-                border-bottom: 1px solid #e3e6ed;
-            }
-        </style>
+        <!-- Removed old .table CSS to avoid style conflicts -->
         </div>
 </body>
 </html>

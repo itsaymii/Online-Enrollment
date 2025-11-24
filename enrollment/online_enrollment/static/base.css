@@ -1,3 +1,101 @@
+/* Glassmorphism core styles */
+.glass {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    border-top: 1.5px solid rgba(255,255,255,0.45);
+    border-left: 1.5px solid rgba(255,255,255,0.45);
+    transition: box-shadow 0.2s, border 0.2s, background 0.2s;
+}
+
+.glass-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.22) 60%, rgba(200,220,255,0.18) 100%);
+    border-radius: 22px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    border-top: 1.5px solid rgba(255,255,255,0.55);
+    border-left: 1.5px solid rgba(255,255,255,0.55);
+    padding: 2rem 1.5rem;
+    margin-bottom: 2rem;
+    transition: box-shadow 0.2s, border 0.2s, background 0.2s;
+}
+
+.glass-table {
+    background: rgba(255,255,255,0.16);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px 0 rgba(31, 38, 135, 0.10);
+    backdrop-filter: blur(8px) saturate(140%);
+    -webkit-backdrop-filter: blur(8px) saturate(140%);
+    border: 1px solid rgba(255,255,255,0.25);
+    overflow: hidden;
+}
+
+.glass-modal {
+    background: rgba(255,255,255,0.22);
+    border-radius: 24px;
+    box-shadow: 0 12px 48px 0 rgba(31, 38, 135, 0.22);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border: 2px solid rgba(255,255,255,0.35);
+    padding: 2.5rem 2rem 2rem 2rem;
+    transition: box-shadow 0.2s, border 0.2s, background 0.2s;
+}
+
+/* Update body for subtle gradient background */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(120deg, #e0e7ff 0%, #f8fafc 100%);
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Update headings for modern look */
+h1, h2, h3, h4, h5 {
+    color: #2563eb;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 8px rgba(31,38,135,0.06);
+}
+
+/* Update buttons for glassmorphism */
+.btn {
+    border-radius: 12px !important;
+    box-shadow: 0 2px 12px rgba(31,38,135,0.08);
+    border: none;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.btn-success {
+    background: linear-gradient(90deg, #22c55e 60%, #16a34a 100%);
+    color: #fff;
+}
+.btn-success:hover {
+    background: linear-gradient(90deg, #16a34a 60%, #22c55e 100%);
+    color: #fff;
+}
+.btn-primary {
+    background: linear-gradient(90deg, #2563eb 60%, #0d6efd 100%);
+    color: #fff;
+}
+.btn-primary:hover {
+    background: linear-gradient(90deg, #0d6efd 60%, #2563eb 100%);
+    color: #fff;
+}
+.btn-secondary {
+    background: rgba(200,220,255,0.22);
+    color: #2563eb;
+}
+.btn-secondary:hover {
+    background: #2563eb;
+    color: #fff;
+}
 
         * {
             margin: 0;

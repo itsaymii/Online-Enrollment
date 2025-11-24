@@ -239,16 +239,124 @@ def logout_user(request):
 def dashboard(request):
     tab = request.GET.get('tab', 'students')
     context = {'tab': tab}
+
+    # Handle POST for all tabs
+    if request.method == 'POST':
+        action = request.POST.get('action', '')
+        # Students
+        if tab == 'students':
+            if action == 'add':
+                add_form = StudentForm(request.POST)
+                if add_form.is_valid():
+                    add_form.save()
+                    messages.success(request, 'Student added successfully!')
+                    return redirect(f'{request.path}?tab=students')
+                context['add_form'] = add_form
+            elif action.startswith('edit_'):
+                student_id = request.POST.get('student_id')
+                student = Student.objects.get(student_id=student_id)
+                edit_form = StudentForm(request.POST, instance=student)
+                if edit_form.is_valid():
+                    edit_form.save()
+                    messages.success(request, 'Student updated successfully!')
+                    return redirect(f'{request.path}?tab=students')
+                # fallback: show errors in modal
+                context['edit_form'] = edit_form
+        # Courses
+        elif tab == 'courses':
+            if action == 'add':
+                add_form = CourseForm(request.POST)
+                if add_form.is_valid():
+                    add_form.save()
+                    messages.success(request, 'Course added successfully!')
+                    return redirect(f'{request.path}?tab=courses')
+                context['add_form'] = add_form
+            elif action.startswith('edit_'):
+                course_id = request.POST.get('course_id')
+                course = Course.objects.get(course_id=course_id)
+                edit_form = CourseForm(request.POST, instance=course)
+                if edit_form.is_valid():
+                    edit_form.save()
+                    messages.success(request, 'Course updated successfully!')
+                    return redirect(f'{request.path}?tab=courses')
+                context['edit_form'] = edit_form
+        # Payments
+        elif tab == 'payments':
+            if action == 'add':
+                add_form = PaymentForm(request.POST)
+                if add_form.is_valid():
+                    add_form.save()
+                    messages.success(request, 'Payment added successfully!')
+                    return redirect(f'{request.path}?tab=payments')
+                context['add_form'] = add_form
+            elif action.startswith('edit_'):
+                payment_id = request.POST.get('payment_id')
+                payment = Payment.objects.get(payment_id=payment_id)
+                edit_form = PaymentForm(request.POST, instance=payment)
+                if edit_form.is_valid():
+                    edit_form.save()
+                    messages.success(request, 'Payment updated successfully!')
+                    return redirect(f'{request.path}?tab=payments')
+                context['edit_form'] = edit_form
+        # Instructors
+        elif tab == 'instructors':
+            if action == 'add':
+                add_form = InstructorForm(request.POST)
+                if add_form.is_valid():
+                    add_form.save()
+                    messages.success(request, 'Instructor added successfully!')
+                    return redirect(f'{request.path}?tab=instructors')
+                context['add_form'] = add_form
+            elif action.startswith('edit_'):
+                instructor_id = request.POST.get('instructor_id')
+                instructor = Instructor.objects.get(instructor_id=instructor_id)
+                edit_form = InstructorForm(request.POST, instance=instructor)
+                if edit_form.is_valid():
+                    edit_form.save()
+                    messages.success(request, 'Instructor updated successfully!')
+                    return redirect(f'{request.path}?tab=instructors')
+                context['edit_form'] = edit_form
+        # Enrollments
+        elif tab == 'enrollments':
+            if action == 'add':
+                add_form = EnrollmentForm(request.POST)
+                if add_form.is_valid():
+                    add_form.save()
+                    messages.success(request, 'Enrollment added successfully!')
+                    return redirect(f'{request.path}?tab=enrollments')
+                context['add_form'] = add_form
+            elif action.startswith('edit_'):
+                enrollment_id = request.POST.get('enrollment_id')
+                enrollment = Enrollment.objects.get(enrollment_id=enrollment_id)
+                edit_form = EnrollmentForm(request.POST, instance=enrollment)
+                if edit_form.is_valid():
+                    edit_form.save()
+                    messages.success(request, 'Enrollment updated successfully!')
+                    return redirect(f'{request.path}?tab=enrollments')
+                context['edit_form'] = edit_form
+
+    # Always provide fresh data for the selected tab
     if tab == 'students':
         context['students'] = Student.objects.all()
+        context['add_form'] = context.get('add_form', StudentForm())
+        context['student_forms'] = [(s, StudentForm(instance=s)) for s in context['students']]
     elif tab == 'courses':
         context['courses'] = Course.objects.all()
+        context['add_form'] = context.get('add_form', CourseForm())
+        context['course_forms'] = [(c, CourseForm(instance=c)) for c in context['courses']]
     elif tab == 'payments':
         context['payments'] = Payment.objects.all()
+        context['add_form'] = context.get('add_form', PaymentForm())
+        context['payment_forms'] = [(p, PaymentForm(instance=p)) for p in context['payments']]
     elif tab == 'instructors':
         context['instructors'] = Instructor.objects.all()
+        context['add_form'] = context.get('add_form', InstructorForm())
+        context['instructor_forms'] = [(i, InstructorForm(instance=i)) for i in context['instructors']]
     elif tab == 'enrollments':
         context['enrollments'] = Enrollment.objects.all()
+        context['add_form'] = context.get('add_form', EnrollmentForm())
+        context['enrollment_forms'] = [(e, EnrollmentForm(instance=e)) for e in context['enrollments']]
+
     from django.contrib import messages as msg_framework
     context['messages'] = msg_framework.get_messages(request)
     return render(request, 'accounts/dashboard.html', context)

@@ -140,64 +140,68 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body>
         <div class="container mt-3" style="background: #f9f9f9; border-radius: 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); padding: 32px 24px; max-width: 1200px;">
-            <div class="d-flex align-items-center justify-content-between mb-4">
-                <h2 class="fw-bold text-primary mb-0">Instructors List</h2>
-                <button class="btn btn-success rounded-3 fw-semibold px-4 py-2" onclick="openModal('addInstructorModal')">Add Instructor</button>
+                    <!-- Add Instructor Modal -->
+                        <div class="modal" id="addInstructorModal">
+                            <div class="modal-content glass-modal">
+                            <span class="close btn btn-secondary float-end">&times;</span>
+                            <h2 class="mb-4 fw-bold text-primary">Add Instructor</h2>
+                            <form method="post" action="{% url 'dashboard' %}?tab=instructors">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="add">
+                                {{ add_form.as_p }}
+                                <button type="submit" class="btn btn-success px-4 py-2 rounded-3">Add Instructor</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Edit Instructor Modals -->
+                    {% for instructor, edit_form in instructor_forms %}
+                        <div class="modal" id="editInstructorModal{{ instructor.instructor_id }}">
+                            <div class="modal-content glass-modal">
+                            <span class="close btn btn-secondary float-end">&times;</span>
+                            <h2 class="mb-4 fw-bold text-primary">Edit Instructor</h2>
+                            <form method="post" action="{% url 'dashboard' %}?tab=instructors">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="edit_{{ instructor.instructor_id }}">
+                                <input type="hidden" name="instructor_id" value="{{ instructor.instructor_id }}">
+                                {{ edit_form.as_p }}
+                                <button type="submit" class="btn btn-primary px-4 py-2 rounded-3">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                    {% endfor %}
+            <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-4 gap-2">
+                <h2 class="fw-bold text-primary mb-0 text-center text-md-start">Instructors List</h2>
+                <button class="btn btn-success rounded-3 fw-semibold px-4 py-2 w-100 w-md-auto" style="max-width:220px;" onclick="openModal('addInstructorModal')">Add Instructor</button>
             </div>
-            <div class="table-responsive" style="max-height: 520px; min-height: 420px; overflow-y: auto;">
-                <table class="table align-middle bg-white rounded-4 shadow-sm overflow-hidden" style="min-width: 700px;">
-                    <thead class="bg-primary text-white" style="position: sticky; top: 0; z-index: 2;">
-                        <tr style="border-radius: 12px;">
-                            <th class="py-3 px-4" style="position: sticky; top: 0; background: linear-gradient(90deg, #2563eb 60%, #0d6efd 100%); z-index: 3;">Instructor ID</th>
-                            <th class="py-3 px-4" style="position: sticky; top: 0; background: linear-gradient(90deg, #2563eb 60%, #0d6efd 100%); z-index: 3;">Name</th>
-                            <th class="py-3 px-4" style="position: sticky; top: 0; background: linear-gradient(90deg, #2563eb 60%, #0d6efd 100%); z-index: 3;">Email</th>
-                            <th class="py-3 px-2" style="position: sticky; top: 0; background: linear-gradient(90deg, #2563eb 60%, #0d6efd 100%); z-index: 3; width: 120px;">Department</th>
-                            <th class="py-3 px-4" style="position: sticky; top: 0; background: linear-gradient(90deg, #2563eb 60%, #0d6efd 100%); z-index: 3;">Contact Number</th>
-                            <th class="py-3 px-4" style="position: sticky; top: 0; background: #2563eb; z-index: 3;">Actions</th>
+                 <div class="table-responsive rounded-4 shadow-lg p-2" style="background: rgba(255,255,255,0.22); backdrop-filter: blur(16px); border-radius: 24px; box-shadow: 0 8px 32px 0 rgba(31,38,135,0.14); border: 1.5px solid rgba(37,99,235,0.10);">
+                     <table class="table align-middle" style="background: rgba(255,255,255,0.13); border-radius: 18px; overflow: hidden; border-collapse: separate; border-spacing: 0; box-shadow: 0 2px 12px rgba(31,38,135,0.10);">
+                     <thead style="background: linear-gradient(90deg, #2563eb 60%, #0d6efd 100%); color: #fff; border-top-left-radius: 18px; border-top-right-radius: 18px; font-size: 1.08rem; letter-spacing: 0.5px;">
+                         <tr style="border-radius: 18px;">
+                            <th scope="col">Instructor ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Contact Number</th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                     <tbody style="backdrop-filter: blur(4px); font-size: 1.01rem;">
                         {% for instructor in instructors %}
-                        <tr class="table-row-hover" style="transition: background 0.2s;">
-                            <td class="py-3 px-4">{{ instructor.instructor_id }}</td>
-                            <td class="py-3 px-4">{{ instructor.name }}</td>
-                            <td class="py-3 px-4">{{ instructor.email }}</td>
-                            <td class="py-3 px-2" style="width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ instructor.department }}</td>
-                            <td class="py-3 px-4">{{ instructor.contact_number }}</td>
-                            <td class="py-3 px-4">
-                                <button class="btn btn-primary btn-sm rounded-2 px-3" onclick="openModal('editInstructorModal{{ instructor.instructor_id }}')">Edit</button>
+                         <tr style="transition: background 0.18s; border-bottom: 1.5px solid rgba(37,99,235,0.07);" onmouseover="this.style.background='rgba(37,99,235,0.13)'; this.style.color='#222';" onmouseout="this.style.background='rgba(37,99,235,0.07)'; this.style.color='';">
+                             <td style="padding: 0.75rem 1.1rem; background: rgba(37,99,235,0.07); border-right: 1px solid rgba(37,99,235,0.06);">{{ instructor.instructor_id }}</td>
+                             <td style="padding: 0.75rem 1.1rem; background: rgba(37,99,235,0.07); border-right: 1px solid rgba(37,99,235,0.06);">{{ instructor.name }}</td>
+                             <td style="padding: 0.75rem 1.1rem; background: rgba(37,99,235,0.07); border-right: 1px solid rgba(37,99,235,0.06);">{{ instructor.email }}</td>
+                             <td style="padding: 0.75rem 1.1rem; background: rgba(37,99,235,0.07); border-right: 1px solid rgba(37,99,235,0.06); width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ instructor.department }}</td>
+                             <td style="padding: 0.75rem 1.1rem; background: rgba(37,99,235,0.07); border-right: 1px solid rgba(37,99,235,0.06);">{{ instructor.contact_number }}</td>
+                             <td style="padding: 0.75rem 1.1rem; background: rgba(37,99,235,0.07);"> 
+                                <div class="d-flex flex-column flex-sm-row gap-2">
+                                    <button class="btn btn-primary btn-sm rounded-2 px-3" onclick="openModal('editInstructorModal{{ instructor.instructor_id }}')">Edit</button>
+                                </div>
                             </td>
                         </tr>
                         {% empty %}
                         <tr><td colspan="6" class="text-center py-4">No instructors found.</td></tr>
                         {% endfor %}
-                                <div class="modal" id="addInstructorModal">
-                                    <div class="modal-content">
-                                        <span class="close btn btn-secondary float-end">&times;</span>
-                                        <h2 class="mb-4 fw-bold text-primary">Add Instructor</h2>
-                                        <form method="post" action="{% url 'instructors_list' %}">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="action" value="add">
-                                            {{ add_form.as_p }}
-                                            <button type="submit" class="btn btn-success px-4 py-2 rounded-3">Add Instructor</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                {% for instructor, edit_form in instructor_forms %}
-                                <div class="modal" id="editInstructorModal{{ instructor.instructor_id }}">
-                                    <div class="modal-content">
-                                        <span class="close btn btn-secondary float-end">&times;</span>
-                                        <h2 class="mb-4 fw-bold text-primary">Edit Instructor</h2>
-                                        <form method="post" action="{% url 'instructors_list' %}">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="action" value="edit_{{ instructor.instructor_id }}">
-                                            <input type="hidden" name="instructor_id" value="{{ instructor.instructor_id }}">
-                                            {{ edit_form.as_p }}
-                                            <button type="submit" class="btn btn-primary px-4 py-2 rounded-3">Update</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                {% endfor %}
                     </tbody>
                 </table>
             </div>
